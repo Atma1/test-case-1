@@ -1,4 +1,4 @@
-import { findByDateCuti, findCutiByNomorInduk, deleteId, insertCuti, editCuti, getAll, getById } from "./cuti.repository";
+import { findByDateCuti, deleteId, insertCuti, editCuti, getAll, getById } from "./cuti.repository";
 import { CutiData } from "./cuti.repository";
 
 export const getAllCuti = async () => {
