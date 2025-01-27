@@ -12,7 +12,7 @@ export const findByDateCuti = async (tanggalCuti: string) => {
     return await prisma.cuti.findMany({
         where: {
             tanggal_cuti: {
-                equals: new Date(tanggalCuti)
+                lte: new Date(tanggalCuti)
             }
         }
     });
