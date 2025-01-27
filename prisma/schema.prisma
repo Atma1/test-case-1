@@ -1,0 +1,28 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model cuti {
+  id           Int      @id @default(autoincrement())
+  nomor_induk  String   @db.VarChar(10)
+  tanggal_cuti DateTime @db.Date
+  lama_cuti    Int
+  keterangan   String   @db.VarChar(50)
+  karyawan     karyawan @relation(fields: [nomor_induk], references: [nomor_induk], onUpdate: Restrict, map: "cuti_ibfk_1")
+
+  @@index([nomor_induk], map: "nomor_induk")
+}
+
+model karyawan {
+  nomor_induk       String   @id @db.VarChar(10)
+  nama              String   @db.VarChar(50)
+  alamat            String   @db.VarChar(100)
+  tanggal_lahir     DateTime @db.Date
+  tanggal_bergabung DateTime @default(now()) @db.Date
+  cuti              cuti[]
+}
