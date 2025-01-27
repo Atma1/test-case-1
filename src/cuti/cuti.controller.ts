@@ -6,13 +6,12 @@ const router = express.Router();
 router.get("/", async (req: Request, res: Response) => {
     try {
         const tanggalCuti = req.query.tanggalCuti as string;
-        let cuti;
+
         if (tanggalCuti) {
-            cuti = await getAllCutiByDate(tanggalCuti);
+            res.send(await getAllCutiByDate(tanggalCuti));
         } else {
-            cuti = await getAllCuti();
+            res.send(await getAllCuti());
         }
-        res.send(cuti);
     } catch (error) {
         if (error instanceof Error) {
             res.status(400).send(error.message);
