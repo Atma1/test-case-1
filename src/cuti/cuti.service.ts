@@ -10,7 +10,10 @@ export const getAllCutiByDate = async (tanggalCuti: string) => {
 }
 
 export const deleteCuti = async (id: number) => {
-    await getById(id);
+    const cuti = await getById(id);
+    if (!cuti) {
+        throw new Error(`Cuti with id cuti ${id} is not found!`);
+    }
     await deleteId(id);
 }
 
